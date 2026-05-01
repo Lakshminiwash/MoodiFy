@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken")
 const blackListModal = require("../modals/blackList.modal")
+const redis = require("../config/cache")
 
 async function authUser(req, res, next) {
     const token = req.cookies.token
@@ -10,13 +11,11 @@ async function authUser(req, res, next) {
         })
     }
 
-    const isTokenBlackListed = await blackListModal.findOne({
-        token
-    })
+    const isTokenBlacklisted = await redis.get(token)
 
-    if(isTokenBlackListed){
+    if (isTokenBlacklisted) {
         return res.status(401).json({
-            message:"invalid token"
+            message: "invalid token"
         })
     }
 

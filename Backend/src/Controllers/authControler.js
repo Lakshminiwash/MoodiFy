@@ -1,3 +1,4 @@
+const redis = require("../config/cache")
 const userModal = require("../modals/auth.modle")
 const blackListModal = require("../modals/blackList.modal")
 const bcrypt = require("bcrypt")
@@ -121,9 +122,7 @@ async function logOut(req, res) {
 
     res.clearCookie("token")
 
-    await blackListModal.create({
-        token
-    })
+    await redis.set(token,Date.now().toString(),"EX",60*60)
 
     res.status(200).json({
         message: "logout successfully."
