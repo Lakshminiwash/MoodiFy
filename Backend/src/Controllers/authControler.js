@@ -1,4 +1,5 @@
 const userModal = require("../modals/auth.modle")
+const blackListModal = require("../modals/blackList.modal")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 
@@ -11,7 +12,7 @@ async function registerUser(req, res) {
             { email },
             { username }
         ]
-    })
+    }).select("+password")
 
     if (isAllreadyExist) {
         return res.status(400).json({
@@ -34,13 +35,13 @@ async function registerUser(req, res) {
             username: user.username
 
         }
-        ,process.env.JWT_SECRET,
+        , process.env.JWT_SECRET,
         {
-           expiresIn:"3d"
+            expiresIn: "3d"
         }
     )
 
-    res.cookie("token",token)
+    res.cookie("token", token)
 
     res.status(201).json({
         message: "user registered successfully",
@@ -55,10 +56,10 @@ async function registerUser(req, res) {
 }
 
 async function loginUser(req, res) {
-    const { username,email, password } = req.body
+    const { username, email, password } = req.body
 
     const user = await userModal.findOne({
-        $or:[
+        $or: [
             {
                 username
             },
@@ -74,11 +75,11 @@ async function loginUser(req, res) {
         })
     }
 
-    const ispasswordCorrect = await bcrypt.compare(password,user.password)
+    const ispasswordCorrect = await bcrypt.compare(password, user.password)
 
-    if(!ispasswordCorrect){
+    if (!ispasswordCorrect) {
         return res.status(400).json({
-            message:"invalid credentials"
+            message: "invalid credentials"
         })
     }
 
@@ -105,7 +106,33 @@ async function loginUser(req, res) {
     })
 }
 
+async function getMe(req, res) {
+
+    const user = await userModal.findById(req.user.id)
+
+    res.status(200).json({
+        message: "user fetched successfully",
+        user
+    })
+}
+
+async function logOut(req, res) {
+    const token = req.cookies.token
+
+    res.clearCookie("token")
+
+    await blackListModal.create({
+        token
+    })
+
+    res.status(200).json({
+        message: "logout successfully."
+    })
+}
+
 module.exports = {
     registerUser,
-    loginUser
+    loginUser,
+    getMe,
+    logOut
 }
