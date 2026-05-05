@@ -12,6 +12,7 @@ router.post("/login",authController.loginUser)
 // /api/auth/get-me 
 router.get("/get-me",authMiddleWare.authUser,authController.getMe)
 
+// /api/auth/logOut 
 router.get("/logOut",authController.logOut)
 
 
