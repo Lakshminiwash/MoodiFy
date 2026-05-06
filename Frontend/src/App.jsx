@@ -1,13 +1,15 @@
 import { RouterProvider } from "react-router-dom"
-import FaceExpression from "./features/Expression/component/FaceExpression"
 import "./features/shared/style/globle.scss"
 import { router } from "./appRoutes"
 import { AuthProvider } from "./features/auth/auth.Context"
+import { SongContextProvider } from "./features/home/Song.context"
 
 const App = () => {
   return (
     <AuthProvider>
-      <RouterProvider router={router} />
+      <SongContextProvider>
+        <RouterProvider router={router} />
+      </SongContextProvider>
     </AuthProvider>
   )
 }

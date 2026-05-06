@@ -33,7 +33,8 @@ export default function FaceExpression({ onClick = () => { } }) {
 
 
     return (
-        <div style={{ textAlign: "center" }}>
+        <div style={{textAlign:"center", display:"flex",flexDirection:"column" ,width:"fit-content",marginTop:"10vh",gap:"1rem",justifySelf:"center"}}>
+            
             <video
                 ref={videoRef}
                 style={{ width: "400px", borderRadius: "12px" }}
