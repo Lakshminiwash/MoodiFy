@@ -3,6 +3,8 @@ import Login from "./features/auth/pages/Login"
 import Register from "./features/auth/pages/Register"
 import Protected from "./features/home/components/Protected"
 import Home from "./features/home/pages/Home"
+import AddSong from "./features/home/pages/AddSong"
+import FaceExpression from "./features/Expression/component/FaceExpression"
 
 export const router = createBrowserRouter([
     {
@@ -16,5 +18,13 @@ export const router = createBrowserRouter([
     {
         path:"/register",
         element:<Register/>
+    },
+    {
+        path:"/expression",
+        element:<FaceExpression/>
+    },
+    {
+        path:"/addSong",
+        element:<AddSong/>
     }
 ])

@@ -1,13 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { detect, init } from "../utils/utils";
+import { useNavigate } from "react-router-dom";
+import "./faceExpression.scss"
 
 
 export default function FaceExpression({ onClick = () => { } }) {
+    const navigate = useNavigate()
     const videoRef = useRef(null);
     const landmarkerRef = useRef(null);
     const streamRef = useRef(null);
 
-    const [ expression, setExpression ] = useState("Detecting...");
+    const [expression, setExpression] = useState("Detecting...");
 
     useEffect(() => {
         init({ landmarkerRef, videoRef, streamRef });
@@ -27,21 +30,23 @@ export default function FaceExpression({ onClick = () => { } }) {
 
     async function handleClick() {
         const expression = detect({ landmarkerRef, videoRef, setExpression })
-        console.log(expression)
         onClick(expression)
     }
 
 
     return (
-        <div style={{textAlign:"center", display:"flex",flexDirection:"column" ,width:"fit-content",marginTop:"10vh",gap:"1rem",justifySelf:"center"}}>
-            
-            <video
-                ref={videoRef}
-                style={{ width: "400px", borderRadius: "12px" }}
-                playsInline
-            />
-            <h2>{expression}</h2>
-            <button onClick={handleClick} >Detect expression</button>
+        <div className="container">
+            <button className="backButton" onClick={() => window.location.reload()}>Go Back</button>
+            <div className="box">
+                <video
+                    ref={videoRef}
+                    style={{ width: "400px", borderRadius: "12px" }}
+                    playsInline
+                />
+                <h2>{expression}</h2>
+                <button onClick={handleClick} >Detect expression</button>
+            </div>
+            <button className="addButton" onClick={() => navigate("/addSong")}>Add songs</button>
         </div>
     );
 }

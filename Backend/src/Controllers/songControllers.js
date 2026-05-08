@@ -38,7 +38,7 @@ async function uploadSong(req, res) {
 async function getSong(req, res) {
     const { mood } = req.query
 
-    const song = await songModal.findOne({
+    const song = await songModal.find({
         mood,
     })
 
