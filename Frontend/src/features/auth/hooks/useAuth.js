@@ -15,9 +15,14 @@ export const useAuth = () => {
 
     async function handleLogin({ email, password }) {
         setLoading(true)
-        const data = await login({ email, password })
-        setUser(data.user)
-        setLoading(false)
+        try {
+            const data = await login({ email, password })
+            setUser(data.user)
+            setLoading(false)
+        } catch (error) {
+            setLoading(false)
+            throw error
+        }
     }
 
     const handleGetMe = useCallback(async () => {

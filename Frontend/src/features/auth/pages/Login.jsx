@@ -12,8 +12,18 @@ const Login = () => {
 
     async function handleSubmit(e) {
         e.preventDefault()
-        await handleLogin({ email, password })
-        navigate("/")
+        try {
+            await handleLogin({ email, password })
+            navigate("/")
+        } catch (error) {
+            const errorMessage = error.response?.data?.message || error.message
+            if (errorMessage.includes("not registered") || errorMessage.includes("not found")) {
+                alert("Email is not registered")
+            } else {
+                alert(errorMessage || "Login failed")
+            }
+            navigate("/login")
+        }
     }
 
     if (loading) {
@@ -28,8 +38,8 @@ const Login = () => {
             <div className="box">
                 <form onSubmit={handleSubmit}>
                     <h1>Login</h1>
-                    <input type="email" name='email' value={email} onChange={(e) => { setEmail(e.target.value) }} placeholder='enter email' />
-                    <input type="password" name='password' value={password} onChange={(e) => { setPassword(e.target.value) }} placeholder='enter password' />
+                    <input required type="email" name='email' value={email} onChange={(e) => { setEmail(e.target.value) }} placeholder='enter email' />
+                    <input required type="password" name='password' value={password} onChange={(e) => { setPassword(e.target.value) }} placeholder='enter password' />
                     <button>Login</button>
                     <p>Don't have an account <Link to={"/register"}>register</Link></p>
                 </form>

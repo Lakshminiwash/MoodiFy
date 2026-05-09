@@ -29,9 +29,9 @@ const Register = () => {
             <div className="box">
                 <form onSubmit={submitHandler}>
                     <h1>Register</h1>
-                    <input type="text" value={username} name='username' onChange={(e)=>{setUsername(e.target.value)}} placeholder='enter username'/>
-                    <input type="email" value={email} name='email' onChange={(e)=>{setEmail(e.target.value)}} placeholder='enter email'/>
-                    <input type="password" value={password} name='password' onChange={(e)=>{setPassword(e.target.value)}} placeholder='enter password'/>
+                    <input required type="text" value={username} name='username' onChange={(e)=>{setUsername(e.target.value)}} placeholder='enter username'/>
+                    <input required type="email" value={email} name='email' onChange={(e)=>{setEmail(e.target.value)}} placeholder='enter email'/>
+                    <input required type="password" value={password} name='password' onChange={(e)=>{setPassword(e.target.value)}} placeholder='enter password'/>
                     <button>register</button>
                     <p>Already have an account <Link to={"/login"}>login</Link></p>
                 </form>
