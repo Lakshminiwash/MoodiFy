@@ -1,34 +1,8 @@
-// .container{
-//     display:"flex";
-//     align-items: flex-start;
-//     justify-content: center;
-//     gap: 15rem;
-//     padding-top: 2rem;
-//     padding-inline: 3rem;
-
-//     .backButton{
-//         background-color: slategray;
-//     }
-//     .box{
-//         text-align: center;
-//         height: fit-content;
-//         display: flex;
-//         flex-direction: column;
-//         width: fit-content;
-//         gap: .8rem;
-//         justify-self: center;
-//     }
-//     .addbutton{
-//         background-color: seagreen;
-//     }
-   
-// }
-
 .container {
     display: flex;
     align-items: flex-start;
-    justify-content: center;
-    gap: 15rem;
+    justify-content: flex-start;
+    gap: 20rem;
     min-width: 300px;
     padding-top: 2rem;
     padding-inline: 3rem;
@@ -54,9 +28,6 @@
         }
     }
 
-    .addbutton {
-        background-color: seagreen;
-    }
 }
 
 
@@ -75,10 +46,6 @@
         padding-top: 1.5rem;
 
         .backButton,
-        .addbutton {
-            width: 100%;
-            max-width: 150px;
-        }
 
         .box {
             width: 80%;

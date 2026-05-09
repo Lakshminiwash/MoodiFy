@@ -1,11 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { detect, init } from "../utils/utils";
-import { useNavigate } from "react-router-dom";
 import "./faceExpression.scss"
 
 
 export default function FaceExpression({ onClick = () => { } }) {
-    const navigate = useNavigate()
     const videoRef = useRef(null);
     const landmarkerRef = useRef(null);
     const streamRef = useRef(null);
@@ -46,7 +44,6 @@ export default function FaceExpression({ onClick = () => { } }) {
                 <h2>{expression}</h2>
                 <button onClick={handleClick} >Detect expression</button>
             </div>
-            <button className="addButton" onClick={() => navigate("/addSong")}>Add songs</button>
         </div>
     );
 }
