@@ -4,7 +4,7 @@ import Playlist from '../components/Playlist'
 import { useSong } from '../hooks/useSongs'
 import { useContext } from 'react'
 import { AuthContext } from '../../auth/auth.Context'
-import HomePage from '../components/homePage'
+import HomePage from "../components/HomePage"
 
 const Home = () => {
 
