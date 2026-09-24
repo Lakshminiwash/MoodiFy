@@ -1,10 +1,10 @@
-import { useContext, useEffect, useCallback } from "react"
+import { useContext, useCallback } from "react"
 import { AuthContext } from "../auth.Context"
 import { getMe, login, logout, register } from "../services/Auth.api"
 
 export const useAuth = () => {
     const context = useContext(AuthContext)
-    const { user, setUser, loading, setLoading, isInitialized, setIsInitialized } = context
+    const { user, setUser, loading, setLoading, setIsInitialized } = context
 
     async function handleRegister({ email, password, username }) {
         setLoading(true)
@@ -43,12 +43,6 @@ export const useAuth = () => {
         setUser(null)
         setLoading(false)
     }
-
-    useEffect(() => {
-        if (!isInitialized) {
-            handleGetMe()
-        }
-    }, [isInitialized, handleGetMe])
 
     return ({ user, loading, handleRegister, handleLogin, handleGetMe, handleLogout })
 }
